@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smurf Fortnite Script Configurator</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body class="bg-[#0c0f1a] text-white min-h-screen flex items-center justify-center p-4">
+  <div class="w-full max-w-3xl bg-[#151a28] rounded-xl shadow-xl p-6 space-y-6">
+    <h1 class="text-3xl font-extrabold text-center text-blue-500">🎮 SmurfSeinDady Fortnite Configurator</h1>
+    <form id="configForm" class="space-y-5">
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <input name="platform" placeholder="Plattform (PS5, Xbox, PC)" class="bg-[#1e2539] p-3 rounded-md w-full placeholder-gray-400 text-white" required>
+        <input name="controller" placeholder="Controller-Modell" class="bg-[#1e2539] p-3 rounded-md w-full placeholder-gray-400 text-white" required>
+        <input name="deadzone_left_min" placeholder="Left Stick Deadzone Min" type="number" class="bg-[#1e2539] p-3 rounded-md w-full placeholder-gray-400 text-white">
+        <input name="deadzone_left_max" placeholder="Left Stick Deadzone Max" type="number" class="bg-[#1e2539] p-3 rounded-md w-full placeholder-gray-400 text-white">
+        <input name="deadzone_right_min" placeholder="Right Stick Deadzone Min" type="number" class="bg-[#1e2539] p-3 rounded-md w-full placeholder-gray-400 text-white">
+        <input name="deadzone_right_max" placeholder="Right Stick Deadzone Max" type="number" class="bg-[#1e2539] p-3 rounded-md w-full placeholder-gray-400 text-white">
+        <input name="horizontal_sens" placeholder="Horizontale Sensitivität" class="bg-[#1e2539] p-3 rounded-md w-full placeholder-gray-400 text-white">
+        <input name="vertical_sens" placeholder="Vertikale Sensitivität" class="bg-[#1e2539] p-3 rounded-md w-full placeholder-gray-400 text-white">
+        <input name="ads_sens" placeholder="ADS Sensitivität" class="bg-[#1e2539] p-3 rounded-md w-full placeholder-gray-400 text-white">
+        <input name="aim_curve" placeholder="Aim Curve (Standard, Linear, Expo)" class="bg-[#1e2539] p-3 rounded-md w-full placeholder-gray-400 text-white">
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <select name="mode" class="bg-[#1e2539] p-3 rounded-md w-full text-white">
+          <option value="Build">Ich spiele Build</option>
+          <option value="ZeroBuild">Ich spiele Zero Build</option>
+        </select>
+        <select name="aim_style" class="bg-[#1e2539] p-3 rounded-md w-full text-white">
+          <option value="Tracking">Tracking</option>
+          <option value="L2Spam">L2-Spam</option>
+          <option value="Flicks">Flickshots</option>
+        </select>
+        <input name="main_weapons" placeholder="Hauptwaffen (z. B. AR, SMG)" class="bg-[#1e2539] p-3 rounded-md w-full placeholder-gray-400 text-white">
+        <input name="fov" placeholder="Sichtfeld (FOV, optional)" class="bg-[#1e2539] p-3 rounded-md w-full placeholder-gray-400 text-white">
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <label class="flex items-center space-x-2"><input type="checkbox" name="loot_auto_pickup" class="form-checkbox text-blue-500"> <span>Auto Loot Pickup</span></label>
+        <label class="flex items-center space-x-2"><input type="checkbox" name="no_deadzone_limit" class="form-checkbox text-blue-500"> <span>Deadzone Bypass</span></label>
+        <label class="flex items-center space-x-2"><input type="checkbox" name="recoil_control" class="form-checkbox text-blue-500"> <span>Recoil Kontrolle</span></label>
+        <label class="flex items-center space-x-2"><input type="checkbox" name="sniper_hold_breath" class="form-checkbox text-blue-500"> <span>Sniper Hold Breath</span></label>
+      </div>
+
+      <textarea name="clip_link" placeholder="Clip-Link deines Aim-Stils (optional)" class="bg-[#1e2539] p-3 rounded-md w-full placeholder-gray-400 text-white"></textarea>
+      <input name="discord_name" placeholder="Dein Discord-Name (z. B. user#1234)" class="bg-[#1e2539] p-3 rounded-md w-full placeholder-gray-400 text-white" required>
+
+      <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-md">✅ Anfrage senden</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('configForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const data = {};
+      formData.forEach((value, key) => { data[key] = value; });
+
+      try {
+        await axios.post('https://discord.com/api/webhooks/1382288299292627066/Lna_7q-FEKIZCNe7IhdYvKFDbRfQVytcOhoHhzS7Lp5RJxGOd1KV835Qc7RhSBfsPD-_', {
+          content: `📥 Neue Fortnite Script Anfrage:\n` +
+            Object.entries(data).map(([k, v]) => `**${k}**: ${v}`).join('\n')
+        });
+        alert('✅ Deine Anfrage wurde erfolgreich gesendet!');
+        e.target.reset();
+      } catch (err) {
+        console.error(err);
+        alert('❌ Fehler beim Senden. Bitte Webhook & Internet prüfen.');
+      }
+    });
+  </script>
+</body>
+</html>
