@@ -1,64 +1,130 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Smurf Fortnite Script Configurator</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <title>SmurfSeinDady Custom Script Konfigurator</title>
+  <style>
+    body {
+      background-color: #0d1117;
+      color: #c9d1d9;
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+    }
+    .container {
+      max-width: 640px;
+      margin: 0 auto;
+      background-color: #161b22;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #000;
+    }
+    h1 {
+      color: #58a6ff;
+      text-align: center;
+      font-size: 1.75rem;
+      font-weight: bold;
+      margin-bottom: 0.25rem;
+    }
+    p.subtitle {
+      color: #8b949e;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    label {
+      display: block;
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+      color: #c9d1d9;
+    }
+    input, select, textarea {
+      width: 100%;
+      background-color: #0d1117;
+      color: #c9d1d9;
+      border: 1px solid #30363d;
+      border-radius: 6px;
+      padding: 0.75rem;
+      font-size: 1rem;
+    }
+    button {
+      width: 100%;
+      background-color: #238636;
+      color: white;
+      padding: 0.75rem;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 1.5rem;
+    }
+    button:hover {
+      background-color: #2ea043;
+    }
+    .footer {
+      text-align: center;
+      font-size: 0.75rem;
+      color: #6e7681;
+      margin-top: 2rem;
+    }
+  </style>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
-<body class="bg-[#0c0f1a] text-white min-h-screen flex items-center justify-center p-4">
-  <div class="w-full max-w-3xl bg-[#151a28] rounded-xl shadow-xl p-6 space-y-6">
-    <h1 class="text-3xl font-extrabold text-center text-blue-500">🎮 SmurfSeinDady Fortnite Configurator</h1>
-    <form id="configForm" class="space-y-5">
+<body>
+  <div class="container">
+    <h1>🎮 SmurfSeinDady Custom Script Konfigurator</h1>
+    <p class="subtitle">Trage hier deine Werte ein und sende uns deine Wunschkonfiguration für dein privates Cronus Zen Script.</p>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <input name="platform" placeholder="Plattform (PS5, Xbox, PC)" class="bg-[#1e2539] p-3 rounded-md w-full placeholder-gray-400 text-white" required>
-        <input name="controller" placeholder="Controller-Modell" class="bg-[#1e2539] p-3 rounded-md w-full placeholder-gray-400 text-white" required>
-        <input name="deadzone_left_min" placeholder="Left Stick Deadzone Min" type="number" class="bg-[#1e2539] p-3 rounded-md w-full placeholder-gray-400 text-white">
-        <input name="deadzone_left_max" placeholder="Left Stick Deadzone Max" type="number" class="bg-[#1e2539] p-3 rounded-md w-full placeholder-gray-400 text-white">
-        <input name="deadzone_right_min" placeholder="Right Stick Deadzone Min" type="number" class="bg-[#1e2539] p-3 rounded-md w-full placeholder-gray-400 text-white">
-        <input name="deadzone_right_max" placeholder="Right Stick Deadzone Max" type="number" class="bg-[#1e2539] p-3 rounded-md w-full placeholder-gray-400 text-white">
-        <input name="horizontal_sens" placeholder="Horizontale Sensitivität" class="bg-[#1e2539] p-3 rounded-md w-full placeholder-gray-400 text-white">
-        <input name="vertical_sens" placeholder="Vertikale Sensitivität" class="bg-[#1e2539] p-3 rounded-md w-full placeholder-gray-400 text-white">
-        <input name="ads_sens" placeholder="ADS Sensitivität" class="bg-[#1e2539] p-3 rounded-md w-full placeholder-gray-400 text-white">
-        <input name="aim_curve" placeholder="Aim Curve (Standard, Linear, Expo)" class="bg-[#1e2539] p-3 rounded-md w-full placeholder-gray-400 text-white">
-      </div>
+    <form id="configForm">
+      <label for="fov">🧿 Sichtfeld (FoV)</label>
+      <input id="fov" name="fov" placeholder="z. B. 105" required>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <select name="mode" class="bg-[#1e2539] p-3 rounded-md w-full text-white">
-          <option value="Build">Ich spiele Build</option>
-          <option value="ZeroBuild">Ich spiele Zero Build</option>
-        </select>
-        <select name="aim_style" class="bg-[#1e2539] p-3 rounded-md w-full text-white">
-          <option value="Tracking">Tracking</option>
-          <option value="L2Spam">L2-Spam</option>
-          <option value="Flicks">Flickshots</option>
-        </select>
-        <input name="main_weapons" placeholder="Hauptwaffen (z. B. AR, SMG)" class="bg-[#1e2539] p-3 rounded-md w-full placeholder-gray-400 text-white">
-        <input name="fov" placeholder="Sichtfeld (FOV, optional)" class="bg-[#1e2539] p-3 rounded-md w-full placeholder-gray-400 text-white">
-      </div>
+      <label for="ads_sens">🎯 ADS-Sensitivität</label>
+      <input id="ads_sens" name="ads_sens" placeholder="z. B. 1.10" required>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <label class="flex items-center space-x-2"><input type="checkbox" name="loot_auto_pickup" class="form-checkbox text-blue-500"> <span>Auto Loot Pickup</span></label>
-        <label class="flex items-center space-x-2"><input type="checkbox" name="no_deadzone_limit" class="form-checkbox text-blue-500"> <span>Deadzone Bypass</span></label>
-        <label class="flex items-center space-x-2"><input type="checkbox" name="recoil_control" class="form-checkbox text-blue-500"> <span>Recoil Kontrolle</span></label>
-        <label class="flex items-center space-x-2"><input type="checkbox" name="sniper_hold_breath" class="form-checkbox text-blue-500"> <span>Sniper Hold Breath</span></label>
-      </div>
+      <label for="deadzone">🎮 Stick-Deadzone</label>
+      <input id="deadzone" name="deadzone" placeholder="z. B. L3: 3 / R3: 2" required>
 
-      <textarea name="clip_link" placeholder="Clip-Link deines Aim-Stils (optional)" class="bg-[#1e2539] p-3 rounded-md w-full placeholder-gray-400 text-white"></textarea>
-      <input name="discord_name" placeholder="Dein Discord-Name (z. B. user#1234)" class="bg-[#1e2539] p-3 rounded-md w-full placeholder-gray-400 text-white" required>
+      <label for="aim_style">📌 Zielstil</label>
+      <select id="aim_style" name="aim_style">
+        <option value="Tracking">Tracking</option>
+        <option value="Snappy">Snappy</option>
+        <option value="Flicks">Flickshots</option>
+      </select>
 
-      <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-md">✅ Anfrage senden</button>
+      <label for="play_style">⚡ Spielstil</label>
+      <select id="play_style" name="play_style">
+        <option value="Aggressiv">Aggressiv</option>
+        <option value="Defensiv">Defensiv</option>
+        <option value="Ausgeglichen">Ausgeglichen</option>
+      </select>
+
+      <label for="ads_multiplier">📈 ZV-Empfindlichkeits-Multiplikator</label>
+      <input id="ads_multiplier" name="ads_multiplier" placeholder="z. B. 1.00">
+
+      <label for="sensitivity">📉 Gesamte Empfindlichkeit (H/V)</label>
+      <input id="sensitivity" name="sensitivity" placeholder="z. B. 1.55 / 1.50">
+
+      <label for="discord">🔗 Deine Discord-ID</label>
+      <input id="discord" name="discord" placeholder="z. B. Smurff#1234" required>
+
+      <label for="notes">📝 Weitere Wünsche oder Notizen</label>
+      <textarea id="notes" name="notes" rows="4" placeholder="Optional: Waffen, Verhalten, Extras..."></textarea>
+
+      <button type="submit">✅ Anfrage anzeigen</button>
     </form>
+
+    <p class="footer">© 2025 SmurfSeinDady Scripts – Dein Cronus Zen Spezialist für PS5 Gaming</p>
   </div>
 
   <script>
-    document.getElementById('configForm').addEventListener('submit', async function (e) {
+    document.getElementById('configForm').addEventListener('submit', async function(e) {
       e.preventDefault();
       const formData = new FormData(e.target);
       const data = {};
-      formData.forEach((value, key) => { data[key] = value; });
+      formData.forEach((value, key) => {
+        data[key] = value;
+      });
 
       try {
         await axios.post('https://discord.com/api/webhooks/1382288299292627066/Lna_7q-FEKIZCNe7IhdYvKFDbRfQVytcOhoHhzS7Lp5RJxGOd1KV835Qc7RhSBfsPD-_', {
